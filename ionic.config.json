@@ -1,0 +1,7 @@
+{
+  "name": "saloonlite",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
