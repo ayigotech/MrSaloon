@@ -1,0 +1,43 @@
+<!-- settings.component.html -->
+<ion-content class="settings-content" fullscreen>
+    <!-- Header -->
+    <!-- INFO BANNER -->
+    <div class="info-banner">
+        <div class="info-icon">
+            <ion-icon name="information-circle"></ion-icon>
+        </div>
+        <div class="info-content">
+            <p class="info-title">Settings</p>
+            <p class="info-text">
+                App & Data Settings
+            </p>
+        </div>
+    </div>
+
+    <!-- Settings Actions -->
+    <div class="settings-section">
+
+
+        <div class="actions-list">
+            <div *ngFor="let action of settingsActions" class="action-item" (click)="navigateTo(action.route)">
+                <div class="action-icon" [class]="action.color">
+                    <ion-icon [name]="action.icon"></ion-icon>
+                </div>
+
+                <div class="action-content">
+                    <div class="action-title">{{action.title}}</div>
+                    <div class="action-description">{{action.description}}</div>
+                </div>
+
+                <div class="action-arrow">
+                    <ion-icon name="chevron-forward"></ion-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Future Sections Placeholder -->
+    <div class="future-section">
+        <p class="future-text">More settings coming soon...</p>
+    </div>
+</ion-content>

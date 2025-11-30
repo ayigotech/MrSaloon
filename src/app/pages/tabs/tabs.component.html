@@ -1,0 +1,35 @@
+<!-- tabs.page.html -->
+<ion-tabs>
+    <ion-tab-bar slot="bottom" class="bottom-nav">
+        <ion-tab-button [routerLink]="['/tabs/home']">
+            <ion-icon name="home"></ion-icon>
+            <ion-label>Home</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button [routerLink]="['/tabs/transaction']">
+            <ion-icon name="list"></ion-icon>
+            <ion-label>Sales</ion-label>
+        </ion-tab-button>
+
+        <!-- <ion-tab-button class="fab-tab" (click)="quickAddSales()">
+            <div class="fab-tab-inner">
+                <ion-icon name="add"></ion-icon>
+            </div>
+        </ion-tab-button> -->
+
+        <ion-tab-button [routerLink]="['/tabs/dashboard']">
+            <ion-icon name="grid-outline"></ion-icon>
+            <ion-label>Dashboard</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button [routerLink]="['/tabs/services-mgt']">
+            <ion-icon name="layers-outline"></ion-icon>
+            <ion-label>Services</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="settings" [routerLink]="['/tabs/settings']">
+            <ion-icon name="settings"></ion-icon>
+            <ion-label>Settings</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

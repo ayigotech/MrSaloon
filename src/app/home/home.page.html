@@ -1,20 +1,82 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="home-content">
+    <div class="home-container">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <!-- Header -->
+        <div class="header" data-aos="fade-down">
+            <div class="shop-info">
+                <h1>Today's Summary</h1>
+                <p>{{ currentDate | date:'fullDate' }}</p>
+            </div>
+            <ion-icon name="person" class="profile-icon" (click)="goToWelcome()"></ion-icon>
+        </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+        <!-- Summary Cards Grid -->
+        <div class="summary-cards" data-aos="fade-up">
+            <div class="stats-card" *ngFor="let stat of todayStats" [class]="stat.type">
+                <div class="card-icon">
+                    <ion-icon [name]="stat.icon"></ion-icon>
+                </div>
+                <div class="card-content">
+                    <span class="currency">{{stat.currency}}</span>
+                    <div class="amount">{{ stat.amount | number:'1.0-2' }}</div>
+                    <div class="label">{{ stat.label }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's Transactions -->
+        <div class="transactions-section" data-aos="fade-up" data-aos-delay="200">
+            <div class="section-header">
+                <h2>Today's Transactions</h2>
+                <span class="count">{{ todayTransactions.length }} transactions</span>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item" *ngFor="let transaction of todayTransactions; let last = last" [class]="transaction.type" [class.last-item]="last" data-aos="fade-right">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="timeline-line" *ngIf="!last"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="transaction-header">
+                            <div class="transaction-title">{{ transaction.type }}</div>
+                            <div class="transaction-amount" [class]="transaction.type">
+                                GHc{{ transaction.amount}}
+                            </div>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-time">{{ transaction.datetime | date:'yyyy-MM-dd HH:mm'}}</div>
+                            <div class="transaction-customer" *ngIf="transaction.category">
+                                {{ transaction.category }}
+                            </div>
+                        </div>
+                        <div class="transaction-service" *ngIf="transaction.service">
+                            {{ transaction.service }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" *ngIf="todayTransactions.length === 0" data-aos="fade-up">
+                <ion-icon name="receipt"></ion-icon>
+                <p>No transactions today</p>
+                <small>Your sales and expenses will appear here</small>
+            </div>
+        </div>
+
+
+        <button class="add-fab" (click)="addSale()">
+      <ion-icon name="add-outline"></ion-icon>
+    </button>
+
+
+        <button class="add-fab-exp" (click)="addExpense()">
+      <ion-icon name="add-outline"></ion-icon>
+    </button>
+
+
+        <!-- Bottom Spacer -->
+        <div class="bottom-spacer"></div>
+    </div>
 </ion-content>

@@ -1,0 +1,60 @@
+/* tabs.page.css */
+
+.bottom-nav {
+    // --background: rgba(255, 255, 255, 0.1);
+    --background: linear-gradient(135deg, #0d1c23 80%, #081e29 20%);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    --padding-start: 10px;
+    /* left margin inside tab bar */
+    --padding-end: 10px;
+    /* right margin inside tab bar */
+    padding: 0.5rem 0;
+    height: 70px;
+}
+
+// :host-context(.light-mode) .bottom-nav {
+//     --background: rgba(255, 255, 255, 0.9);
+//     border-top: 1px solid rgba(8, 16, 23, 0.1);
+// }
+.nav-item {
+    --color: rgba(255, 255, 255, 0.7);
+    --color-selected: #bde079e1;
+    font-size: 0.8rem;
+}
+
+// :host-context(.light-mode) .nav-item {
+//     --color: rgba(8, 16, 23, 0.6);
+//     --color-selected: #FF9800;
+// }
+// .fab-tab {
+//     transform: translateY(-10px);
+// }
+.fab-tab-inner {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #bde079e1, #FF9800);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #081017;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 20px rgba(189, 224, 121, 0.3);
+    transition: all 0.3s ease;
+}
+
+.fab-tab:active .fab-tab-inner {
+    transform: scale(0.95);
+}
+
+
+/* Ensure the active tab is properly styled */
+
+ion-tab-button.tab-selected {
+    --color-selected: #bde079e1;
+}
+
+:host-context(.light-mode) ion-tab-button.tab-selected {
+    --color-selected: #FF9800;
+}

@@ -1,0 +1,111 @@
+<ion-content class="add-sales-content" fullscreen>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <button class="back-btn" (click)="goBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+            <h1 class="page-title">Add Sales</h1>
+            <div class="header-actions">
+                <button class="save-btn" (click)="saveSale()" [disabled]="!canSave()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFO BANNER -->
+    <div class="info-banner">
+        <div class="info-icon">
+            <ion-icon name="information-circle"></ion-icon>
+        </div>
+        <div class="info-content">
+            <p class="info-title">Recording Tips</p>
+            <p class="info-text">
+                <strong>Recommended:</strong> Record sales as they happen for accurate tracking.
+            </p>
+        </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-container">
+
+        <!-- AMOUNT -->
+        <div class="input-group">
+            <label class="input-label">Amount (GHS) *</label>
+            <div class="amount-input-container">
+                <span class="currency-symbol">GHS</span>
+                <input type="number" class="amount-input" placeholder="0.00" [(ngModel)]="saleData.amount">
+            </div>
+        </div>
+
+        <!-- QUICK AMOUNT BUTTONS -->
+        <div class="quick-amounts">
+            <button *ngFor="let amount of quickAmounts" class="quick-amount-btn" (click)="setQuickAmount(amount)" [class.active]="saleData.amount === amount">
+                GHS {{ amount }}
+            </button>
+        </div>
+
+        <!-- DATE -->
+        <div class="input-group">
+            <label class="input-label">Date</label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="saleData.datetime" (dateChange)="onDateChange($event)" placeholder="Choose date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </div>
+
+
+        <!-- CUSTOMER -->
+        <div class="input-group">
+            <label class="input-label">Customer (Optional)</label>
+            <input class="text-input" type="text" [(ngModel)]="saleData.customer" placeholder="Customer name">
+        </div>
+
+        <!-- CATEGORY -->
+        <div class="input-group">
+            <label class="input-label">Service (Optional)</label>
+            <div class="category-select" (click)="openServiceModal()">
+                <span class="category-text">
+                    {{ saleData.service || 'Select service' }}
+                </span>
+                <ion-icon name="chevron-down"></ion-icon>
+            </div>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="input-group">
+            <label class="input-label">Description (Optional)</label>
+            <textarea class="text-input textarea" [(ngModel)]="saleData.description" placeholder="Additional notes about this sale" rows="3"></textarea>
+        </div>
+
+    </div>
+
+    <!-- FLOATING ACTION BUTTON -->
+    <button class="fab-save" (click)="quickSave()" [class.active]="canSave()">
+        <ion-icon name="checkmark"></ion-icon>
+    </button>
+
+</ion-content>
+
+<!-- CATEGORY PICKER MODAL -->
+<ion-modal [isOpen]="showServiceModal" (didDismiss)="showServiceModal = false">
+    <ng-template>
+        <ion-header>
+            <ion-toolbar class="select-category">
+                <ion-title class="select-category-title">Select Service</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button (click)="showServiceModal = false">Close</ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content class="select-category">
+            <div class="category-options">
+                <button *ngFor="let category of serviceNames" class="category-option" [class.selected]="saleData.service === category" (click)="selectService(category)">
+            {{ category }}
+        </button>
+            </div>
+        </ion-content>
+    </ng-template>
+</ion-modal>

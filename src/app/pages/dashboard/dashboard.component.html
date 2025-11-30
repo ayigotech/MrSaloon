@@ -1,0 +1,192 @@
+<ion-content class="dashboard-content" fullscreen>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <button class="back-btn" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+            <h1 class="page-title">Business Insights</h1>
+            <div class="header-actions">
+                <button class="refresh-btn" (click)="calculateDashboardMetrics()">
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Trends -->
+    <div class="section">
+        <h2 class="section-title">Performance Trends</h2>
+        <div class="metrics-grid">
+
+            <!-- Weekly Growth -->
+            <div class="metric-card" data-aos="fade-up">
+                <div class="metric-header">
+                    <div class="metric-icon" [class]="getGrowthColor(dashboardData.weeklyGrowth)">
+                        <ion-icon [name]="getGrowthIcon(dashboardData.weeklyGrowth)"></ion-icon>
+                    </div>
+                    <div class="metric-value">{{ dashboardData.weeklyGrowth }}%</div>
+                </div>
+                <div class="metric-label">Weekly Growth</div>
+                <div class="metric-subtext">
+                    vs last week
+                </div>
+            </div>
+
+            <!-- Revenue Consistency -->
+            <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="metric-header">
+                    <div class="metric-icon" [class]="getConsistencyLevel(dashboardData.revenueConsistency)">
+                        <ion-icon name="pulse"></ion-icon>
+                    </div>
+                    <div class="metric-value">{{ dashboardData.revenueConsistency }}%</div>
+                </div>
+                <div class="metric-label">Revenue Consistency</div>
+                <div class="metric-subtext" [class]="getConsistencyLevel(dashboardData.revenueConsistency)">
+                    {{ getConsistencyLevel(dashboardData.revenueConsistency) | titlecase }}
+                </div>
+            </div>
+
+            <!-- Best Performing Day -->
+            <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="metric-header">
+                    <div class="metric-icon primary">
+                        <ion-icon name="calendar"></ion-icon>
+                    </div>
+                    <div class="metric-value">{{ dashboardData.bestPerformingDay }}</div>
+                </div>
+                <div class="metric-label">Best Day</div>
+                <div class="metric-subtext">
+                    Most revenue
+                </div>
+            </div>
+
+            <!-- Average Service Value -->
+            <div class="metric-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="metric-header">
+                    <div class="metric-icon primary">
+                        <ion-icon name="cash"></ion-icon>
+                    </div>
+                    <div class="metric-value">GHS {{ dashboardData.averageServiceValue }}</div>
+                </div>
+                <div class="metric-label">Avg. Service Value</div>
+                <div class="metric-subtext">
+                    Per transaction
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Service Intelligence -->
+    <div class="section" data-aos="fade-up">
+        <h2 class="section-title">Service Distribution</h2>
+        <div class="service-distribution">
+            <div class="service-item" *ngFor="let service of dashboardData.serviceDistribution">
+                <div class="service-header">
+                    <span class="service-name">{{ service.service }}</span>
+                    <span class="service-percentage">{{ service.percentage }}%</span>
+                </div>
+                <div class="service-details">
+                    <span class="service-revenue">GHS {{ service.averageRevenue }} avg</span>
+                    <span class="service-count">{{ service.transactionCount }} sales</span>
+                </div>
+                <div class="service-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" [style.width.%]="service.percentage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Operational Patterns -->
+    <div class="section">
+        <h2 class="section-title">Operational Patterns</h2>
+        <div class="patterns-grid">
+
+            <div class="pattern-card">
+                <div class="pattern-icon">
+                    <ion-icon name="time"></ion-icon>
+                </div>
+                <div class="pattern-content">
+                    <div class="pattern-value">{{ dashboardData.peakHours.join(', ') }}</div>
+                    <div class="pattern-label">Peak Hours</div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-icon">
+                    <ion-icon name="stats-chart"></ion-icon>
+                </div>
+                <div class="pattern-content">
+                    <div class="pattern-value">{{ dashboardData.dailyTransactionAverage }}</div>
+                    <div class="pattern-label">Avg. Daily Transactions</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Financial Health -->
+    <div class="section">
+        <h2 class="section-title">Financial Health</h2>
+        <div class="financial-grid">
+
+            <div class="financial-card">
+                <div class="financial-header">
+                    <div class="financial-value">{{ dashboardData.expenseRatio }}%</div>
+                    <div class="financial-trend" [class]="dashboardData.expenseRatio <= 15 ? 'positive' : 'negative'">
+                        <ion-icon [name]="dashboardData.expenseRatio <= 15 ? 'checkmark' : 'warning'"></ion-icon>
+                    </div>
+                </div>
+                <div class="financial-label">Expense Ratio</div>
+                <div class="financial-subtext">of revenue</div>
+            </div>
+
+            <div class="financial-card">
+                <div class="financial-header">
+                    <div class="financial-value">{{ dashboardData.profitMargin }}%</div>
+                    <div class="financial-trend positive">
+                        <ion-icon name="checkmark"></ion-icon>
+                    </div>
+                </div>
+                <div class="financial-label">Profit Margin</div>
+                <div class="financial-subtext">Healthy</div>
+            </div>
+
+            <div class="financial-card">
+                <div class="financial-header">
+                    <div class="financial-value">{{ dashboardData.monthlyGrowth }}%</div>
+                    <div class="financial-trend" [class]="getGrowthColor(dashboardData.monthlyGrowth)">
+                        <ion-icon [name]="getGrowthIcon(dashboardData.monthlyGrowth)"></ion-icon>
+                    </div>
+                </div>
+                <div class="financial-label">Monthly Growth</div>
+                <div class="financial-subtext">Revenue increase</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Pro Version CTA -->
+    <div class="pro-cta">
+        <div class="cta-content">
+            <div class="cta-icon">
+                <ion-icon name="rocket"></ion-icon>
+            </div>
+            <div class="cta-text">
+                <h3>Want Customer Insights?</h3>
+                <p>Manage your customers, track their retention, preferences, and lifetime value with Pro version</p>
+            </div>
+        </div>
+        <button class="cta-button" disabled>
+      Coming Soon
+    </button>
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-content class="welcome-content">
+    <div class="welcome-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+
+
+        <!-- Avatar Icon -->
+        <div class="avatar-section">
+            <div class="avatar-circle">
+                <ion-icon name="person" class="avatar-icon"></ion-icon>
+            </div>
+        </div>
+
+        <!-- Welcome Text -->
+        <div class="welcome-text">
+            <h1>Welcome!</h1>
+            <p>Ready to manage your salon business?</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn-continue" (click)="continue()" data-aos="zoom-in" data-aos-delay="400">
+        <span>Continue</span>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+
+            <button class="btn-logout" (click)="logout()" data-aos="fade-in" data-aos-delay="600">
+        <ion-icon name="log-out"></ion-icon>
+        <span>Logout</span>
+      </button>
+        </div>
+
+        <!-- Additional Links Placeholder -->
+        <div class="additional-links" data-aos="fade-in" data-aos-delay="800">
+            <!-- Space for future additional buttons -->
+        </div>
+    </div>
+</ion-content>

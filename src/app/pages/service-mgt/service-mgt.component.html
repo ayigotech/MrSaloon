@@ -1,0 +1,100 @@
+<ion-content class="service-mgt-content" fullscreen>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <button class="back-btn" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+            <h1 class="page-title">Manage Services</h1>
+            <div class="header-actions">
+                <span class="services-count">{{ getActiveServices().length }} active</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Service Form -->
+    <div class="add-service-section" data-aos="fade-up">
+        <h2 class="section-title">Add New Service</h2>
+        <div class="add-service-form">
+            <div class="input-group">
+                <input type="text" class="text-input" placeholder="Service name" [(ngModel)]="newServiceName" (keyup.enter)="addService()">
+            </div>
+            <div class="input-group">
+                <div class="price-input-container">
+                    <span class="currency-symbol">GHS</span>
+                    <input type="number" class="price-input" placeholder="0" [(ngModel)]="newServicePrice" (keyup.enter)="addService()">
+                </div>
+            </div>
+            <button class="add-btn" (click)="addService()" [disabled]="!newServiceName || !newServicePrice">
+        <ion-icon name="add"></ion-icon>
+        Add Service
+      </button>
+        </div>
+    </div>
+
+    <!-- Services List -->
+    <div class="services-section" data-aos="fade-up">
+        <h2 class="section-title">Your Services</h2>
+
+        <div class="services-list">
+            <div class="service-item" *ngFor="let service of services" [class.editing]="editingService?.id === service.id" [class.inactive]="!service.isActive">
+
+                <!-- View Mode -->
+                <div class="service-view" *ngIf="editingService?.id !== service.id">
+                    <div class="service-info">
+                        <div class="service-name">{{ service.name }}</div>
+                        <div class="service-price">{{ formatCurrency(service.price) }}</div>
+                    </div>
+                    <div class="service-actions">
+                        <button class="action-btn edit-btn" (click)="startEdit(service)">
+              <ion-icon name="create"></ion-icon>
+            </button>
+                        <ion-toggle [checked]="service.isActive" (ionChange)="toggleService(service)" class="toggle-btn">
+                        </ion-toggle>
+                        <button class="action-btn delete-btn" (click)="confirmDelete(service)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+                    </div>
+                </div>
+
+                <!-- Edit Mode -->
+                <div class="service-edit" *ngIf="editingService?.id === service.id">
+                    <div class="edit-form">
+                        <input type="text" class="edit-input" [(ngModel)]="editingService!.name">
+                        <div class="price-input-container">
+                            <span class="currency-symbol">GHS</span>
+                            <input type="number" class="edit-price-input" [(ngModel)]="editingService!.price">
+                        </div>
+                    </div>
+                    <div class="edit-actions">
+                        <button class="action-btn save-btn" (click)="saveEdit()">
+              <ion-icon name="checkmark"></ion-icon>
+            </button>
+                        <button class="action-btn cancel-btn" (click)="cancelEdit()">
+              <ion-icon name="close"></ion-icon>
+            </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="services.length === 0">
+            <div class="empty-icon">
+                <ion-icon name="cut"></ion-icon>
+            </div>
+            <h3>No Services Added</h3>
+            <p>Add your first service to get started</p>
+        </div>
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+</ion-content>
+
+<!-- Delete Confirmation Alert -->
+<ion-alert [isOpen]="showDeleteAlert" header="Delete Service" message="Are you sure you want to delete this service? This action cannot be undone." [buttons]="alertButtons" (didDismiss)="showDeleteAlert = false">
+</ion-alert>

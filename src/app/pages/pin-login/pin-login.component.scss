@@ -1,0 +1,224 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.pin-login-content {
+    --background: linear-gradient(-135deg, #f8fafc 80%, #786e04fd 20%);
+}
+
+.pin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 2rem 1.5rem;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+}
+
+.refresh-icon {
+    font-size: 1.5rem;
+    color: #786e04fd;
+    cursor: pointer;
+}
+
+.app-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.icon-circle {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #786e04fd 50%, #dcb526 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(5, 150, 105, 0.2);
+    border-top: 2px solid #34d1094d;
+    border-right: 2px solid #cad1094d;
+}
+
+.icon-circle ion-icon {
+    font-size: 2rem;
+    color: white;
+}
+
+.welcome-text {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.welcome-text h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #1a202c;
+    margin: 0 0 0.5rem 0;
+}
+
+.welcome-text p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #718096;
+    margin: 0;
+}
+
+.pin-dots {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.dot {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid #cbd5e0;
+    transition: all 0.2s ease;
+}
+
+.dot.filled {
+    background: #786e04fd;
+    border-color: #786e04fd;
+}
+
+.keypad {
+    margin-bottom: 2rem;
+}
+
+.keypad-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.key {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 2px solid #e2e8f0;
+    background: white;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.key:active {
+    background: #f7fafc;
+    transform: scale(0.95);
+}
+
+.key.blank {
+    visibility: hidden;
+}
+
+.backspace {
+    font-size: 1.5rem;
+    color: #786e04fd;
+}
+
+.forgot-pin {
+    text-align: center;
+}
+
+.forgot-pin a {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #020202fd;
+    text-decoration: none;
+}
+
+
+/* Tablet Responsive */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .pin-container {
+        padding: 3rem 2rem;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .key {
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 1.4rem;
+    }
+}
+
+
+/* Desktop Responsive */
+
+@media (min-width: 769px) {
+    .pin-container {
+        padding: 4rem 2rem;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    .key {
+        width: 5rem;
+        height: 5rem;
+        font-size: 1.5rem;
+    }
+}
+
+
+/* Mobile Optimizations */
+
+@media (max-width: 380px) {
+    .pin-container {
+        padding: 1.5rem 1rem;
+    }
+    .key {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.2rem;
+    }
+    .keypad-row {
+        gap: 1rem;
+    }
+}
+
+
+/* Landscape Orientation Support */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .pin-container {
+        padding: 1rem;
+        height: auto;
+        min-height: 100vh;
+    }
+    .app-icon {
+        margin-bottom: 1rem;
+    }
+    .icon-circle {
+        width: 3rem;
+        height: 3rem;
+    }
+    .icon-circle ion-icon {
+        font-size: 1.5rem;
+    }
+    .welcome-text {
+        margin-bottom: 1rem;
+    }
+    .pin-dots {
+        margin-bottom: 1.5rem;
+    }
+    .key {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.1rem;
+    }
+}

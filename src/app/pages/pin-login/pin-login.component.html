@@ -1,0 +1,60 @@
+<ion-content class="pin-login-content">
+    <div class="pin-container">
+        <!-- Header with refresh -->
+        <div class="header">
+            <ion-icon name="refresh" class="refresh-icon" (click)="goToSplash()"></ion-icon>
+        </div>
+
+        <!-- App Logo/Icon -->
+        <div class="app-icon">
+            <div class="icon-circle">
+                <ion-icon name="cut"></ion-icon>
+            </div>
+        </div>
+
+        <!-- Welcome Text -->
+        <div class="welcome-text">
+            <h2>Welcome Back</h2>
+            <p>Enter your PIN to continue</p>
+        </div>
+
+        <!-- PIN Dots -->
+        <div class="pin-dots">
+            <div class="dot" [class.filled]="enteredPin.length > 0"></div>
+            <div class="dot" [class.filled]="enteredPin.length > 1"></div>
+            <div class="dot" [class.filled]="enteredPin.length > 2"></div>
+            <div class="dot" [class.filled]="enteredPin.length > 3"></div>
+        </div>
+
+        <!-- Keypad -->
+        <div class="keypad">
+            <div class="keypad-row">
+                <button class="key" (click)="addDigit('1')">1</button>
+                <button class="key" (click)="addDigit('2')">2</button>
+                <button class="key" (click)="addDigit('3')">3</button>
+            </div>
+            <div class="keypad-row">
+                <button class="key" (click)="addDigit('4')">4</button>
+                <button class="key" (click)="addDigit('5')">5</button>
+                <button class="key" (click)="addDigit('6')">6</button>
+            </div>
+            <div class="keypad-row">
+                <button class="key" (click)="addDigit('7')">7</button>
+                <button class="key" (click)="addDigit('8')">8</button>
+                <button class="key" (click)="addDigit('9')">9</button>
+            </div>
+            <div class="keypad-row">
+                <button class="key blank"></button>
+                <button class="key" (click)="addDigit('0')">0</button>
+                <button class="key backspace" (click)="removeDigit()">
+          <ion-icon name="backspace"></ion-icon>
+        </button>
+            </div>
+        </div>
+
+        <!-- Forgot PIN -->
+        <div class="forgot-pin">
+            <a href="#" (click)="forgotPin($event)">Forgot PIN?</a>
+        </div>
+    </div>
+</ion-content>

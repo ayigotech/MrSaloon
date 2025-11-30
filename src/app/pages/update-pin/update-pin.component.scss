@@ -1,0 +1,250 @@
+// update-pin.component.scss
+.update-pin-content {
+    --background: linear-gradient(-135deg, #f8fafc 80%, #786e04fd 20%);
+    --padding-top: 1rem;
+    --padding-bottom: 2rem;
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+}
+
+
+/* Header */
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2d3748;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bde079e1;
+    font-size: 1.2rem;
+}
+
+.page-title {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin: 0;
+    background: linear-gradient(135deg, #bde079e1, #FF9800);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.loading-spinner {
+    color: #bde079e1;
+}
+
+
+/* PIN Section */
+
+.pin-section {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.step-info {
+    margin-bottom: 2rem;
+}
+
+.step-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #2d3748;
+}
+
+.step-description {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin: 0;
+    color: #2d3748;
+}
+
+.pin-display {
+    margin-bottom: 1.5rem;
+}
+
+.pin-dots {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.pin-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #081e29;
+    transition: all 0.3s ease;
+    // background: linear-gradient(-135deg, #0d1c23 0%, #081e29 100%);
+}
+
+.pin-dot.filled {
+    background: #bde079e1;
+    border-color: #cf7e04f4;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #ff6b6b;
+    font-weight: 500;
+    font-size: 0.9rem;
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+
+/* Keypad */
+
+.keypad-section {
+    margin-bottom: 2rem;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.keypad-btn {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 2px solid #e2e8f0;
+    background: white;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.keypad-btn:active:not(:disabled) {
+    background: rgba(189, 224, 121, 0.2);
+    transform: scale(0.95);
+}
+
+.keypad-btn:disabled {
+    opacity: 0.5;
+}
+
+.keypad-btn.backspace {
+    font-size: 1.3rem;
+    color: #ea650ce1;
+}
+
+// .keypad-empty {
+//   /* Empty grid cell for alignment */
+// }
+
+/* Security Tips */
+
+.security-tips {
+    background: rgba(5, 150, 105, 0.1);
+    border: 1px solid rgba(5, 150, 105, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.security-tips h4 {
+    margin: 0 0 1rem 0;
+    color: #081e29;
+    font-size: 1rem;
+}
+
+.security-tips ul {
+    margin: 0;
+    padding-left: 1rem;
+    text-align: left;
+}
+
+.security-tips li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.security-tips li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Light Mode Support */
+
+:host-context(.light-mode) .back-btn {
+    background: rgba(8, 16, 23, 0.05);
+    border: 1px solid rgba(8, 16, 23, 0.1);
+}
+
+:host-context(.light-mode) .keypad-btn {
+    background: rgba(8, 16, 23, 0.05);
+    border: 1px solid rgba(8, 16, 23, 0.1);
+    color: #081017;
+}
+
+:host-context(.light-mode) .security-tips {
+    background: rgba(8, 16, 23, 0.05);
+    border: 1px solid rgba(8, 16, 23, 0.1);
+}
+
+
+/* Responsive */
+
+@media (max-width: 380px) {
+    .keypad-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .update-pin-content {
+        --padding-start: 2rem;
+        --padding-end: 2rem;
+    }
+    .keypad-grid {
+        max-width: 400px;
+        gap: 1.5rem;
+    }
+    .keypad-btn {
+        width: 90px;
+        height: 90px;
+        font-size: 1.8rem;
+    }
+}

@@ -1,0 +1,71 @@
+<!-- update-pin.component.html -->
+<ion-content class="update-pin-content" fullscreen>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <button class="back-btn" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+            <!-- <h1 class="page-title">Update PIN</h1> -->
+            <div class="header-actions">
+                <div class="loading-spinner" *ngIf="isLoading">
+                    <ion-spinner name="crescent"></ion-spinner>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIN Steps -->
+    <div class="pin-section">
+        <div class="step-info">
+            <h2 class="step-title">{{ getStepTitle() }}</h2>
+            <p class="step-description">{{ getStepDescription() }}</p>
+        </div>
+
+        <!-- PIN Display -->
+        <div class="pin-display">
+            <div class="pin-dots">
+                <div *ngFor="let filled of getPinDots(); let i = index" class="pin-dot" [class.filled]="filled"></div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" *ngIf="showError">
+            <ion-icon name="warning"></ion-icon>
+            {{ errorMessage }}
+        </div>
+    </div>
+
+    <!-- Keypad -->
+    <div class="keypad-section">
+        <div class="keypad-grid">
+            <button *ngFor="let digit of [1,2,3,4,5,6,7,8,9]" class="keypad-btn" (click)="addDigit(digit)" [disabled]="isLoading">
+        {{ digit }}
+      </button>
+
+            <!-- Empty space -->
+            <div class="keypad-empty"></div>
+
+            <!-- Zero button -->
+            <button class="keypad-btn" (click)="addDigit(0)" [disabled]="isLoading">
+        0
+      </button>
+
+            <!-- Backspace -->
+            <button class="keypad-btn backspace" (click)="removeDigit()" [disabled]="isLoading">
+        <ion-icon name="backspace"></ion-icon>
+      </button>
+        </div>
+    </div>
+
+    <!-- Security Tips -->
+    <div class="security-tips" *ngIf="currentStep === 'new'">
+        <h4>PIN Security Tips:</h4>
+        <ul>
+            <li>Avoid simple patterns (1234, 0000, etc.)</li>
+            <li>Don't use repeated digits</li>
+            <li>Choose random numbers</li>
+            <li>Don't share your PIN with anyone</li>
+        </ul>
+    </div>
+</ion-content>

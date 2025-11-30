@@ -1,0 +1,416 @@
+.service-mgt-content {
+    // --background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    --background: #fff;
+    --padding-top: 1rem;
+    --padding-bottom: 3rem;
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+    color: #1e293b;
+    font-weight: 300;
+    min-height: 100vh;
+}
+
+
+/* Container for larger screens */
+
+@media (min-width: 768px) {
+    .service-mgt-content {
+        --padding-start: 5%;
+        --padding-end: 5%;
+    }
+}
+
+
+/* Header */
+
+.header {
+    padding: 0.5rem 0 1rem 0;
+    margin-bottom: 1rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.back-btn {
+    background: linear-gradient(135deg, #ffffff 80%, #cad1094d 20%);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.back-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.page-title {
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin: 0;
+    color: #1e293b;
+    text-align: center;
+    flex: 1;
+}
+
+.services-count {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #64748b;
+    background: rgba(5, 150, 105, 0.1);
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    color: #059669;
+}
+
+
+/* Sections */
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin: 0 0 1rem 0;
+    color: #1e293b;
+}
+
+
+/* Add Service Section */
+
+.add-service-section {
+    margin-bottom: 2rem;
+}
+
+.add-service-form {
+    // background: linear-gradient(135deg, #ffffff 80%, #cad1094d 20%);
+    // border: 1px solid #f1f5f9;
+    // border: 1px solid #047857;
+    border-radius: 16px;
+    padding: 1.5rem;
+    // box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.input-group {
+    margin-bottom: 1rem;
+    border: 1px solid #047857;
+    border-radius: 16px;
+    padding: 5px;
+}
+
+.text-input {
+    width: 100%;
+    background: #ffffff;
+    background: transparent;
+    // border: 1px solid #e2e8f0;
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #1e293b;
+    transition: all 0.3s ease;
+    // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+.price-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+}
+
+.currency-symbol {
+    position: absolute;
+    left: 1rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #64748b;
+    z-index: 2;
+}
+
+.price-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: 1px solid #e2e8f0;
+    border: none;
+    border-radius: 12px;
+    // background: white;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 300;
+    text-align: right;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.price-input:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    color: #14161a;
+}
+
+.add-btn {
+    width: 100%;
+    background: #059669;
+    border: 1px solid #047857;
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+}
+
+.add-btn:active:not([disabled]) {
+    transform: scale(0.98);
+    box-shadow: 0 1px 4px rgba(5, 150, 105, 0.4);
+}
+
+.add-btn[disabled] {
+    background: #cbd5e1;
+    border-color: #94a3b8;
+    color: #64748b;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    opacity: 0.6;
+}
+
+
+/* Services List */
+
+.services-section {
+    margin-bottom: 2rem;
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.service-item {
+    background: linear-gradient(135deg, #ffffff 80%, #cad1094d 20%);
+    // background: rgba(5, 150, 105, 0.1);
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    padding: 1.2rem;
+    // box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    &.inactive {
+        opacity: 0.6;
+        background: linear-gradient(135deg, #f8fafc 80%, #cad1094d 20%);
+    }
+}
+
+.service-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.service-info {
+    flex: 1;
+}
+
+.service-name {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #1e293b;
+    margin-bottom: 0.3rem;
+}
+
+.service-price {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #059669;
+}
+
+.service-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    color: #64748b;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.edit-btn:active {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.delete-btn {
+    // background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+}
+
+.save-btn:active {
+    background: rgba(5, 150, 105, 0.1);
+    color: #059669;
+}
+
+.cancel-btn:active {
+    background: rgba(100, 116, 139, 0.1);
+    color: #bd4708;
+}
+
+.toggle-btn {
+    --handle-background-checked: #059669;
+    --background-checked: rgba(5, 150, 105, 0.3);
+}
+
+
+/* Edit Mode */
+
+.service-edit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.edit-form {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+}
+
+.edit-input {
+    flex: 2;
+    background: #ffffff;
+    border: 1px solid #3de52333;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #1e293b;
+}
+
+.edit-price-input {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #c3e918;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem 0.5rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #1e293b;
+    text-align: right;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 0.3rem;
+    // color: #dc2626;
+}
+
+.save-btn {
+    color: #059669;
+}
+
+.cancel-btn {
+    color: #dc2626;
+    font-weight: 500;
+}
+
+
+/* Empty State */
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #64748b;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    color: #cbd5e1;
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin: 0 0 0.5rem 0;
+    color: #475569;
+}
+
+.empty-state p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    margin: 0;
+    line-height: 1.4;
+}
+
+
+/* Bottom Spacer */
+
+.bottom-spacer {
+    height: 1px;
+    margin-bottom: 5rem;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.1rem;
+    }
+    .service-view,
+    .service-edit {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    .service-actions {
+        justify-content: space-between;
+    }
+    .edit-form {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .service-mgt-content {
+        --padding-start: 0.8rem;
+        --padding-end: 0.8rem;
+    }
+    .add-service-form,
+    .service-item {
+        padding: 1.2rem;
+    }
+}

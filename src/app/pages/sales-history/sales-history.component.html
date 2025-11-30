@@ -1,0 +1,130 @@
+<ion-content class="sales-history-content" fullscreen>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <button class="back-btn" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+            <h1 class="page-title">Sales History</h1>
+            <div class="header-actions">
+                <button class="export-btn" (click)="exportData()" [disabled]="dailySummaries.length === 0">
+          <ion-icon name="download"></ion-icon>
+        </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Segment -->
+    <div class="filter-section">
+        <ion-segment [value]="currentFilter" (ionChange)="onFilterChange($event)">
+            <ion-segment-button value="this-week">
+                <span class="segment-label">This Week</span>
+            </ion-segment-button>
+            <ion-segment-button value="this-month">
+                <span class="segment-label">This Month</span>
+            </ion-segment-button>
+            <ion-segment-button value="all">
+                <span class="segment-label">All Time</span>
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-state" *ngIf="isLoading">
+        <div class="loading-spinner"></div>
+        <p>Loading sales history...</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content" *ngIf="!isLoading">
+
+        <!-- Total Stats Card -->
+        <div class="total-stats-card" *ngIf="dailySummaries.length > 0" data-aos="fade-up">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">{{ formatCurrency(getTotalStats().totalRevenue) }}</div>
+                    <div class="stat-label">Total Revenue</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{{ formatCurrency(getTotalStats().totalProfit) }}</div>
+                    <div class="stat-label">Total Profit</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{{ getTotalStats().totalTransactions }}</div>
+                    <div class="stat-label">Transactions</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Summaries -->
+        <div class="daily-summaries" *ngIf="dailySummaries.length > 0">
+            <div class="section-title">Daily Breakdown</div>
+
+            <div class="summary-list">
+                <div class="summary-card" *ngFor="let summary of dailySummaries; let i = index" [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 100">
+
+                    <!-- Date Header -->
+                    <div class="date-header">
+                        <div class="date-info">
+                            <div class="day-name">{{ formatDate(summary.date) }}</div>
+                            <div class="transaction-count">{{ summary.transactionCount }} transactions</div>
+                        </div>
+                        <div class="profit-badge" [class.positive]="summary.netProfit > 0" [class.negative]="summary.netProfit < 0">
+                            {{ formatCurrency(summary.netProfit) }}
+                        </div>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="daily-stats">
+                        <div class="daily-stat">
+                            <div class="stat-icon revenue">
+                                <ion-icon name="trending-up"></ion-icon>
+                            </div>
+                            <div class="stat-details">
+                                <div class="stat-amount">{{ formatCurrency(summary.totalSales) }}</div>
+                                <div class="stat-category">Revenue</div>
+                            </div>
+                        </div>
+
+                        <div class="daily-stat">
+                            <div class="stat-icon expenses">
+                                <ion-icon name="trending-down"></ion-icon>
+                            </div>
+                            <div class="stat-details">
+                                <div class="stat-amount">{{ formatCurrency(summary.totalExpenses) }}</div>
+                                <div class="stat-category">Expenses</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="profit-progress">
+                        <div class="progress-labels">
+                            <span>Profit Margin</span>
+                            <span>{{ (summary.netProfit / summary.totalSales * 100).toFixed(1) }}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" [style.width.%]="(summary.netProfit / summary.totalSales * 100)"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="dailySummaries.length === 0 && !isLoading" data-aos="fade-up">
+            <div class="empty-icon">
+                <ion-icon name="calendar"></ion-icon>
+            </div>
+            <h3>No Sales Data</h3>
+            <p>No sales records found for the selected period.</p>
+        </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+</ion-content>

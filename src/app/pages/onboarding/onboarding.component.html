@@ -1,0 +1,87 @@
+<ion-content class="onboarding-content" fullscreen>
+    <!-- Swipeable Slides Container -->
+    <div class="slides-container">
+        <div class="slides-wrapper" #slidesWrapper>
+            <!-- Slide 1 -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-content">
+                    <!-- Glass Effect Illustration -->
+                    <div class="illustration-container">
+                        <div class="glass-illustration">
+                            <div class="icon-circle">
+                                <ion-icon name="add-circle" class="slide-icon"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        <h2 class="slide-title">Add Sales Quickly</h2>
+                        <p class="slide-description">
+                            Record your daily sales in seconds with our intuitive interface. No complicated forms, just quick entries.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide" data-slide="2">
+                <div class="slide-content">
+                    <div class="illustration-container">
+                        <div class="glass-illustration">
+                            <div class="icon-circle">
+                                <ion-icon name="cloud-offline" class="slide-icon"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        <h2 class="slide-title">Works Offline</h2>
+                        <p class="slide-description">
+                            No internet? No problem! MySaloon works completely offline and syncs when you're back online.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide" data-slide="3">
+                <div class="slide-content">
+                    <div class="illustration-container">
+                        <div class="glass-illustration">
+                            <div class="icon-circle">
+                                <ion-icon name="trending-up" class="slide-icon"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        <h2 class="slide-title">Track Your Profit</h2>
+                        <p class="slide-description">
+                            Instantly see your net profit with automatic calculations. Make smarter business decisions with clear insights.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="slide-indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+        </div>
+    </div>
+
+    <!-- Bottom Action Section -->
+    <div class="bottom-actions">
+        <!-- Skip Button (visible on first two slides) -->
+        <button class="btn-skip" id="skipButton" (click)="skipOnboarding()">
+      Skip
+    </button>
+
+        <!-- Get Started Button -->
+        <button class="btn-primary" id="getStartedButton" (click)="getStarted()">
+      Get Started
+    </button>
+    </div>
+</ion-content>

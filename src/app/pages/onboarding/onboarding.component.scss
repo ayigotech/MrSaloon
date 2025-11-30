@@ -1,0 +1,284 @@
+/* onboarding.component.css */
+
+.onboarding-content {
+    --background: linear-gradient(135deg, #0d1c23 80%, #081e29 20%);
+    --background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.onboarding-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="1" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="1" fill="white" opacity="0.1"/><circle cx="60" cy="60" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.slides-container {
+    height: 85vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slides-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+
+/* Glass Effect Illustrations */
+
+.illustration-container {
+    margin-bottom: 3rem;
+}
+
+.glass-illustration {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(8, 16, 23, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.icon-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #bde079e1, #cad1094d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(189, 224, 121, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.slide-icon {
+    font-size: 3rem;
+    color: #081017;
+}
+
+
+/* Text Content */
+
+.text-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(8, 16, 23, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.slide-title {
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #bde079e1, #FF9800);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    // font-family: 'Inter', sans-serif;
+}
+
+.slide-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgb(18, 16, 16);
+    font-weight: 300;
+    // font-family: 'Inter', sans-serif;
+}
+
+
+/* Slide Indicators */
+
+.slide-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    right: 0;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(231, 5, 5, 0.737);
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    width: 24px;
+    background: #bde079e1;
+    border-radius: 4px;
+}
+
+
+/* Bottom Actions */
+
+.bottom-actions {
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem 2rem;
+}
+
+.btn-skip {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 300;
+    // font-family: 'Inter', sans-serif;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.btn-skip:active {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #bde079e1, #FF9800);
+    border: none;
+    color: #081017;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 20px rgba(189, 224, 121, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 10px rgba(189, 224, 121, 0.4);
+}
+
+
+/* Swipe Gesture Hint */
+
+.swipe-hint {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    // font-family: 'Inter', sans-serif;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 380px) {
+    .slide {
+        padding: 1.5rem;
+    }
+    .icon-circle {
+        width: 100px;
+        height: 100px;
+    }
+    .slide-icon {
+        font-size: 2.5rem;
+    }
+    .slide-title {
+        font-size: 1.5rem;
+    }
+    .slide-description {
+        font-size: 0.9rem;
+    }
+    .bottom-actions {
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .slide-content {
+        max-width: 500px;
+    }
+    .icon-circle {
+        width: 140px;
+        height: 140px;
+    }
+    .slide-icon {
+        font-size: 3.5rem;
+    }
+    .slide-title {
+        font-size: 2rem;
+    }
+    .slide-description {
+        font-size: 1.1rem;
+    }
+}
