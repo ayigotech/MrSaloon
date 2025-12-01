@@ -266,3 +266,26 @@
         min-width: 120px;
     }
 }
+
+@media (max-width: 768px) {
+    /* Avatar Icon */
+    .avatar-icon {
+        font-size: 55px;
+    }
+    /* Welcome Text */
+    .welcome-text h1 {
+        font-size: 26px;
+    }
+    .welcome-text p {
+        font-size: 16px;
+    }
+    /* Buttons */
+    .btn-continue span,
+    .btn-logout span {
+        font-size: 17px;
+    }
+    .btn-continue ion-icon,
+    .btn-logout ion-icon {
+        font-size: 20px;
+    }
+}

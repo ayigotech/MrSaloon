@@ -888,3 +888,90 @@
         height: 32px;
     }
 }
+
+@media (max-width: 768px) {
+    /* Header */
+    .page-title {
+        font-size: 22px;
+    }
+    .save-btn {
+        font-size: 15px;
+    }
+    .back-btn ion-icon {
+        font-size: 22px;
+    }
+    /* Info Banner */
+    .info-title {
+        font-size: 17px;
+    }
+    .info-text {
+        font-size: 14px;
+    }
+    .info-icon ion-icon {
+        font-size: 26px;
+    }
+    /* Labels */
+    .input-label {
+        font-size: 15px;
+    }
+    /* Amount input */
+    .currency-symbol {
+        font-size: 15px;
+    }
+    .amount-input {
+        font-size: 20px;
+    }
+    .input-error {
+        font-size: 13px;
+    }
+    /* Quick amount buttons */
+    .quick-amount-btn {
+        font-size: 14px;
+    }
+    /* Category select */
+    .category-text {
+        font-size: 15px;
+    }
+    /* Vendor input */
+    .text-input {
+        font-size: 15px;
+    }
+    /* Payment methods */
+    .payment-method-btn {
+        font-size: 14px;
+    }
+    .payment-method-btn ion-icon {
+        font-size: 20px;
+    }
+    /* Notes textarea */
+    .notes-input {
+        font-size: 15px;
+    }
+    /* Recent expenses */
+    .section-title {
+        font-size: 18px;
+    }
+    .recent-amount {
+        font-size: 16px;
+    }
+    .recent-vendor {
+        font-size: 14px;
+    }
+    .recent-category {
+        font-size: 13px;
+    }
+    .recent-time {
+        font-size: 12px;
+    }
+    /* FAB save button */
+    .fab-save ion-icon {
+        font-size: 22px;
+    }
+    /* Category modal */
+    .select-category-title {
+        font-size: 20px;
+    }
+    .category-option {
+        font-size: 16px;
+    }
+}

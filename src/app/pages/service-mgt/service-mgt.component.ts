@@ -5,17 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { Service } from 'src/models';
 import { NotificationService } from 'src/app/services/notification';
 import { StorageService } from 'src/app/services/storage';
-import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton,
-   IonIcon, IonItem, IonLabel, IonInput, IonToggle, IonList, IonAlert } from "@ionic/angular/standalone";
+import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonItem, IonLabel, IonInput, IonToggle, IonList, IonAlert, IonRefresher, IonRefresherContent } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-service-mgt',
   templateUrl: './service-mgt.component.html',
   styleUrls: ['./service-mgt.component.scss'],
-  imports: [CommonModule, FormsModule, IonContent, IonIcon, IonToggle, IonAlert,
-    //  IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, 
-    //  IonItem, IonLabel, IonInput, IonList
-    ]
+  imports: [CommonModule, FormsModule, IonContent, IonIcon, IonToggle, IonAlert, IonRefresher, IonRefresherContent]
 })
 export class ServiceMgtComponent implements OnInit {
   services: Service[] = [];
@@ -85,6 +81,24 @@ export class ServiceMgtComponent implements OnInit {
   async ngOnInit() {
     await this.loadServices();
   }
+
+
+   isRefreshing: boolean = false;
+  async refreshPage(event: any) {
+    this.isRefreshing = true;
+    try {
+      await this.loadServices();
+      // this.notificationService.success('Dashboard updated', 'Refresh Complete');
+    } catch (error) {
+      console.error('Error refreshing data:', error);
+      // this.notificationService.error('Failed to refresh data', 'Error');
+    } finally {
+      event.target.complete();
+      this.isRefreshing = false;
+    }
+  }
+
+
 
   async loadServices() {
     try {

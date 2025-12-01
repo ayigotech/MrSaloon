@@ -195,3 +195,33 @@
         padding: 1.5rem 2rem;
     }
 }
+
+@media (max-width: 768px) {
+    /* Info Banner */
+    .info-title {
+        font-size: 22px;
+    }
+    .info-text {
+        font-size: 16px;
+    }
+    .info-icon ion-icon {
+        font-size: 35px;
+    }
+    /* Settings Actions */
+    .action-title {
+        font-size: 17px;
+    }
+    .action-description {
+        font-size: 15px;
+    }
+    .action-icon ion-icon {
+        font-size: 22px;
+    }
+    .action-arrow ion-icon {
+        font-size: 20px;
+    }
+    /* Future Section */
+    .future-text {
+        font-size: 15px;
+    }
+}

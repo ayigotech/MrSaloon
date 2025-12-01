@@ -49,6 +49,7 @@ export class HomePage implements OnInit {
   ];
 
   todayTransactions: Transaction[] = [];
+  isRefreshing: boolean = false;
 
   constructor(
     private router: Router,
@@ -67,6 +68,22 @@ export class HomePage implements OnInit {
   async ngOnInit() {
     await this.loadTodayData();
   }
+
+
+  async refreshPage(event: any) {
+    this.isRefreshing = true;
+    try {
+      await this.loadTodayData();
+      // this.notificationService.success('Dashboard updated', 'Refresh Complete');
+    } catch (error) {
+      console.error('Error refreshing data:', error);
+      // this.notificationService.error('Failed to refresh data', 'Error');
+    } finally {
+      event.target.complete();
+      this.isRefreshing = false;
+    }
+  }
+
 
   async loadTodayData() {
     try {

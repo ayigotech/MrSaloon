@@ -1,5 +1,9 @@
 <ion-content class="sales-history-content" fullscreen>
 
+    <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <!-- Header -->
     <div class="header">
         <div class="header-content">

@@ -214,7 +214,7 @@
 .service-name {
     font-size: 0.9rem;
     font-weight: 300;
-    color: #1e293b;
+    color: #0b0c0c;
 }
 
 .service-percentage {
@@ -521,5 +521,76 @@
     .pattern-card,
     .financial-card {
         padding: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header */
+    .page-title {
+        font-size: 22px;
+    }
+    .back-btn ion-icon {
+        font-size: 22px;
+    }
+    .refresh-btn ion-icon {
+        font-size: 22px;
+    }
+    /* Section Titles */
+    .section-title {
+        font-size: 20px;
+    }
+    /* Metric Cards */
+    .metric-value {
+        font-size: 20px;
+    }
+    .metric-label {
+        font-size: 15px;
+    }
+    .metric-subtext {
+        font-size: 13px;
+    }
+    .metric-icon ion-icon {
+        font-size: 22px;
+    }
+    /* Service Distribution */
+    .service-name {
+        font-size: 16px;
+    }
+    .service-percentage {
+        font-size: 16px;
+    }
+    .service-revenue,
+    .service-count {
+        font-size: 14px;
+    }
+    /* Operational Patterns */
+    .pattern-value {
+        font-size: 18px;
+    }
+    .pattern-label {
+        font-size: 14px;
+    }
+    .pattern-icon ion-icon {
+        font-size: 26px;
+    }
+    /* Financial Health */
+    .financial-value {
+        font-size: 20px;
+    }
+    .financial-label {
+        font-size: 15px;
+    }
+    .financial-subtext {
+        font-size: 13px;
+    }
+    /* CTA */
+    .cta-text h3 {
+        font-size: 18px;
+    }
+    .cta-text p {
+        font-size: 14px;
+    }
+    .cta-button {
+        font-size: 16px;
     }
 }

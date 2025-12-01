@@ -841,3 +841,62 @@
         height: 32px;
     }
 }
+
+@media (max-width: 768px) {
+    /* Header */
+    .page-title {
+        font-size: 22px;
+    }
+    .save-btn {
+        font-size: 15px;
+    }
+    .back-btn ion-icon {
+        font-size: 22px;
+    }
+    /* Info Banner */
+    .info-title {
+        font-size: 17px;
+    }
+    .info-text {
+        font-size: 14px;
+    }
+    .info-icon ion-icon {
+        font-size: 26px;
+    }
+    /* Input Labels */
+    .input-label {
+        font-size: 15px;
+    }
+    /* Amount Input */
+    .currency-symbol {
+        font-size: 15px;
+    }
+    .amount-input {
+        font-size: 20px;
+    }
+    /* Quick Amount Buttons */
+    .quick-amount-btn {
+        font-size: 14px;
+    }
+    /* Text Inputs (Customer, Description) */
+    .text-input,
+    .textarea {
+        font-size: 15px;
+    }
+    /* Category selector */
+    .category-text {
+        font-size: 15px;
+    }
+    /* FAB */
+    .fab-save ion-icon {
+        font-size: 22px;
+    }
+    /* Modal Title */
+    .select-category-title {
+        font-size: 20px;
+    }
+    /* Modal Options */
+    .category-option {
+        font-size: 16px;
+    }
+}

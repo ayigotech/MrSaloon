@@ -532,3 +532,56 @@
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
 }
+
+@media (max-width: 768px) {
+    /* Header */
+    h1 {
+        font-size: 24px;
+    }
+    .header p {
+        font-size: 14px;
+    }
+    /* Summary Cards */
+    .currency {
+        font-size: 13px;
+    }
+    .amount {
+        font-size: 22px;
+    }
+    .label {
+        font-size: 13px;
+    }
+    /* Section Header */
+    h2 {
+        font-size: 20px;
+    }
+    .count {
+        font-size: 13px;
+    }
+    /* Transaction Items */
+    .transaction-title {
+        font-size: 15px;
+    }
+    .transaction-amount {
+        font-size: 16px;
+    }
+    .transaction-time {
+        font-size: 12px;
+    }
+    .transaction-customer {
+        font-size: 13px;
+    }
+    .transaction-service {
+        font-size: 13px;
+    }
+    /* Empty State */
+    .empty-state p {
+        font-size: 16px;
+    }
+    .empty-state small {
+        font-size: 12px;
+    }
+    .empty-state ion-icon {
+        font-size: 38px;
+    }
+}

@@ -282,3 +282,28 @@
         font-size: 1.1rem;
     }
 }
+
+@media (max-width: 768px) {
+    /* Slide Titles */
+    .slide-title {
+        font-size: 22px;
+    }
+    /* Slide Descriptions */
+    .slide-description {
+        font-size: 16px;
+    }
+    /* Slide Icons */
+    .slide-icon {
+        font-size: 45px;
+    }
+    /* Bottom Action Buttons */
+    .btn-skip,
+    .btn-primary {
+        font-size: 16px;
+    }
+    /* Slide Indicators */
+    .slide-indicators .indicator {
+        width: 10px;
+        height: 10px;
+    }
+}

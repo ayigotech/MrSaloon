@@ -1,4 +1,10 @@
 <ion-content class="home-content">
+
+    <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+
     <div class="home-container">
 
         <!-- Header -->

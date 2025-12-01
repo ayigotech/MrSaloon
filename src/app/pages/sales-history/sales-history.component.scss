@@ -429,3 +429,64 @@ ion-segment-button {
         margin-bottom: 0.5rem;
     }
 }
+
+@media (max-width: 768px) {
+    /* Header */
+    .page-title {
+        font-size: 22px;
+    }
+    .back-btn ion-icon,
+    .export-btn ion-icon {
+        font-size: 22px;
+    }
+    /* Segment Filter */
+    .segment-label {
+        font-size: 15px;
+    }
+    /* Loading State */
+    .loading-state p {
+        font-size: 15px;
+    }
+    /* Total Stats */
+    .stat-value {
+        font-size: 20px;
+    }
+    .stat-label {
+        font-size: 14px;
+    }
+    /* Section Title */
+    .section-title {
+        font-size: 20px;
+    }
+    /* Daily Summary Cards */
+    .day-name {
+        font-size: 18px;
+    }
+    .transaction-count {
+        font-size: 14px;
+    }
+    .profit-badge {
+        font-size: 15px;
+    }
+    /* Daily Stats */
+    .stat-amount {
+        font-size: 18px;
+    }
+    .stat-category {
+        font-size: 14px;
+    }
+    .stat-icon ion-icon {
+        font-size: 22px;
+    }
+    /* Profit Progress */
+    .progress-labels span {
+        font-size: 14px;
+    }
+    /* Empty State */
+    .empty-state h3 {
+        font-size: 20px;
+    }
+    .empty-state p {
+        font-size: 15px;
+    }
+}

@@ -5,16 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { DailySummary, SalesHistoryFilter } from 'src/models';
 import { NotificationService } from 'src/app/services/notification';
 import { StorageService } from 'src/app/services/storage';
-import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, 
-  IonButton, IonIcon, IonSegment, IonSegmentButton } from "@ionic/angular/standalone";
+import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonSegment, IonSegmentButton, IonRefresher, IonRefresherContent } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-sales-history',
   templateUrl: './sales-history.component.html',
   styleUrls: ['./sales-history.component.scss'],
-  imports: [CommonModule, FormsModule, IonContent, 
+  imports: [CommonModule, FormsModule, IonContent,
     // IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, 
-    IonIcon, IonSegment, IonSegmentButton]
+    IonIcon, IonSegment, IonSegmentButton, IonRefresher, IonRefresherContent]
 })
 export class SalesHistoryComponent implements OnInit {
   currentFilter: SalesHistoryFilter = 'this-week';
@@ -30,6 +29,23 @@ export class SalesHistoryComponent implements OnInit {
   async ngOnInit() {
     await this.loadSalesHistory();
   }
+
+
+  isRefreshing: boolean = false;
+  async refreshPage(event: any) {
+    this.isRefreshing = true;
+    try {
+      await this.loadSalesHistory();
+      // this.notificationService.success('Dashboard updated', 'Refresh Complete');
+    } catch (error) {
+      console.error('Error refreshing data:', error);
+      // this.notificationService.error('Failed to refresh data', 'Error');
+    } finally {
+      event.target.complete();
+      this.isRefreshing = false;
+    }
+  }
+
 
   async loadSalesHistory() {
     try {

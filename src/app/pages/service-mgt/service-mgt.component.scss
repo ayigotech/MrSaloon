@@ -414,3 +414,61 @@
         padding: 1.2rem;
     }
 }
+
+@media (max-width: 768px) {
+    /* Header */
+    .page-title {
+        font-size: 22px;
+    }
+    .back-btn ion-icon {
+        font-size: 22px;
+    }
+    .services-count {
+        font-size: 15px;
+    }
+    /* Section Titles */
+    .section-title {
+        font-size: 20px;
+    }
+    /* Input Fields */
+    .text-input,
+    .price-input,
+    .edit-input,
+    .edit-price-input {
+        font-size: 16px;
+    }
+    .currency-symbol {
+        font-size: 16px;
+    }
+    /* Add Service Button */
+    .add-btn {
+        font-size: 16px;
+    }
+    .add-btn ion-icon {
+        font-size: 20px;
+    }
+    /* Service List */
+    .service-name {
+        font-size: 17px;
+    }
+    .service-price {
+        font-size: 16px;
+    }
+    /* Action Buttons */
+    .action-btn ion-icon {
+        font-size: 20px;
+    }
+    .toggle-btn {
+        --handle-size: 18px;
+    }
+    /* Empty State */
+    .empty-state h3 {
+        font-size: 20px;
+    }
+    .empty-state p {
+        font-size: 15px;
+    }
+    .empty-state ion-icon {
+        font-size: 40px;
+    }
+}

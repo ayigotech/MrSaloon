@@ -1,5 +1,11 @@
 <ion-content class="service-mgt-content" fullscreen>
 
+
+    <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+
     <!-- Header -->
     <div class="header">
         <div class="header-content">

@@ -4,15 +4,14 @@ import { Router } from '@angular/router';
 import { DashboardMetrics, ServiceDistribution, PerformanceTrend, Transaction, DailySummary, TransactionType } from 'src/models';
 import { NotificationService } from 'src/app/services/notification';
 import { StorageService } from 'src/app/services/storage';
-import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardTitle } from "@ionic/angular/standalone";
+import { IonContent, IonIcon, IonRefresher, IonRefresherContent } from "@ionic/angular/standalone";
+import { IonicModule } from "@ionic/angular";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  imports: [CommonModule, IonContent, IonIcon,
-    //  IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton
-    ]
+  imports: [CommonModule, IonContent, IonIcon, IonRefresherContent, IonRefresher]
 })
 export class DashboardComponent implements OnInit {
   isLoading = true;
@@ -46,6 +45,23 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     await this.calculateDashboardMetrics();
   }
+
+
+   isRefreshing: boolean = false;
+  async refreshPage(event: any) {
+    this.isRefreshing = true;
+    try {
+      await this.calculateDashboardMetrics();
+      // this.notificationService.success('Dashboard updated', 'Refresh Complete');
+    } catch (error) {
+      console.error('Error refreshing data:', error);
+      // this.notificationService.error('Failed to refresh data', 'Error');
+    } finally {
+      event.target.complete();
+      this.isRefreshing = false;
+    }
+  }
+
 
   async calculateDashboardMetrics() {
     try {
@@ -140,46 +156,60 @@ export class DashboardComponent implements OnInit {
  
   private calculateServiceDistribution(transactions: Transaction[], services: any[]) {
   const sales = transactions.filter(t => t.type === TransactionType.SALE);
-  const serviceStats: { [key: string]: { revenue: number, count: number } } = {};
-  
+
+  // Normalize: lowercase and trim to avoid mismatch
+  const normalize = (value: string) => (value || '').trim().toLowerCase();
+
+  const serviceStats: { [key: string]: { label: string, revenue: number, count: number } } = {};
+
   // Initialize with all active services
   services.filter(s => s.isActive).forEach(service => {
-    serviceStats[service.name] = { revenue: 0, count: 0 };
+    const key = normalize(service.name);
+    serviceStats[key] = { label: service.name, revenue: 0, count: 0 };
   });
 
-  // Add "Other" category for sales without service or with unknown services
-  serviceStats['Other'] = { revenue: 0, count: 0 };
+  // Add "Other" category
+  serviceStats['other'] = { label: 'Other', revenue: 0, count: 0 };
+
+  console.log('Initialized serviceStats:', serviceStats);
 
   // Aggregate sales data
   sales.forEach(sale => {
-    const serviceName = sale.service || 'Other';
-    
-    if (!serviceStats[serviceName]) {
-      serviceStats[serviceName] = { revenue: 0, count: 0 };
+    const key = sale.service ? normalize(sale.service) : 'other';
+
+    if (!serviceStats[key]) {
+      // Unrecognized service → count as "Other"
+      serviceStats['other'].revenue += sale.amount;
+      serviceStats['other'].count++;
+      return;
     }
-    
-    serviceStats[serviceName].revenue += sale.amount;
-    serviceStats[serviceName].count++;
+
+    serviceStats[key].revenue += sale.amount;
+    serviceStats[key].count++;
   });
 
+  console.log('After processing sales:', serviceStats);
+
   const totalRevenue = sales.reduce((sum, sale) => sum + sale.amount, 0);
-  
+
   // Convert to ServiceDistribution array
-  this.dashboardData.serviceDistribution = Object.entries(serviceStats)
-    .filter(([_, stats]) => stats.count > 0)
-    .map(([service, stats]) => ({
-      service,
+  this.dashboardData.serviceDistribution = Object.values(serviceStats)
+    .filter(stats => stats.count > 0)
+    .map(stats => ({
+      service: stats.label,
       percentage: totalRevenue > 0 ? (stats.revenue / totalRevenue) * 100 : 0,
       averageRevenue: stats.count > 0 ? stats.revenue / stats.count : 0,
       transactionCount: stats.count
     }))
     .sort((a, b) => b.percentage - a.percentage);
 
-  // Calculate average service value
-  this.dashboardData.averageServiceValue = sales.length > 0 
-    ? totalRevenue / sales.length 
-    : 0;
+  console.log('Final distribution:', this.dashboardData.serviceDistribution);
+
+  // Average service value
+  this.dashboardData.averageServiceValue =
+    sales.length > 0 ? totalRevenue / sales.length : 0;
 }
+
 
 
   private calculateAdditionalMetrics(transactions: Transaction[], summaries: DailySummary[]) {
