@@ -25,7 +25,7 @@
         <div class="metrics-grid">
 
             <!-- Weekly Growth -->
-            <div class="metric-card" data-aos="fade-up">
+            <div class="metric-card">
                 <div class="metric-header">
                     <div class="metric-icon" [class]="getGrowthColor(dashboardData.weeklyGrowth)">
                         <ion-icon [name]="getGrowthIcon(dashboardData.weeklyGrowth)"></ion-icon>
@@ -39,7 +39,7 @@
             </div>
 
             <!-- Revenue Consistency -->
-            <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="metric-card">
                 <div class="metric-header">
                     <div class="metric-icon" [class]="getConsistencyLevel(dashboardData.revenueConsistency)">
                         <ion-icon name="pulse"></ion-icon>
@@ -53,7 +53,7 @@
             </div>
 
             <!-- Best Performing Day -->
-            <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="metric-card">
                 <div class="metric-header">
                     <div class="metric-icon primary">
                         <ion-icon name="calendar"></ion-icon>
@@ -67,12 +67,12 @@
             </div>
 
             <!-- Average Service Value -->
-            <div class="metric-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="metric-card">
                 <div class="metric-header">
                     <div class="metric-icon primary">
                         <ion-icon name="cash"></ion-icon>
                     </div>
-                    <div class="metric-value">GHS {{ dashboardData.averageServiceValue }}</div>
+                    <div class="metric-value">GHS {{ dashboardData.averageServiceValue | number:'1.0-1' }}</div>
                 </div>
                 <div class="metric-label">Avg. Service Value</div>
                 <div class="metric-subtext">
@@ -90,10 +90,10 @@
             <div class="service-item" *ngFor="let service of dashboardData.serviceDistribution">
                 <div class="service-header">
                     <span class="service-name">{{ service.service }}</span>
-                    <span class="service-percentage">{{ service.percentage }}%</span>
+                    <span class="service-percentage">{{ service.percentage | number:'1.0-1' }}%</span>
                 </div>
                 <div class="service-details">
-                    <span class="service-revenue">GHS {{ service.averageRevenue }} avg</span>
+                    <span class="service-revenue">GHS {{ service.averageRevenue }} total</span>
                     <span class="service-count">{{ service.transactionCount }} sales</span>
                 </div>
                 <div class="service-progress">
@@ -140,7 +140,7 @@
 
             <div class="financial-card">
                 <div class="financial-header">
-                    <div class="financial-value">{{ dashboardData.expenseRatio }}%</div>
+                    <div class="financial-value">{{ dashboardData.expenseRatio | number:'1.0-1' }}%</div>
                     <div class="financial-trend" [class]="dashboardData.expenseRatio <= 15 ? 'positive' : 'negative'">
                         <ion-icon [name]="dashboardData.expenseRatio <= 15 ? 'checkmark' : 'warning'"></ion-icon>
                     </div>
@@ -151,7 +151,7 @@
 
             <div class="financial-card">
                 <div class="financial-header">
-                    <div class="financial-value">{{ dashboardData.profitMargin }}%</div>
+                    <div class="financial-value">{{ dashboardData.profitMargin | number:'1.0-1' }}%</div>
                     <div class="financial-trend positive">
                         <ion-icon name="checkmark"></ion-icon>
                     </div>
@@ -162,7 +162,7 @@
 
             <div class="financial-card">
                 <div class="financial-header">
-                    <div class="financial-value">{{ dashboardData.monthlyGrowth }}%</div>
+                    <div class="financial-value">{{ dashboardData.monthlyGrowth | number:'1.0-1' }}%</div>
                     <div class="financial-trend" [class]="getGrowthColor(dashboardData.monthlyGrowth)">
                         <ion-icon [name]="getGrowthIcon(dashboardData.monthlyGrowth)"></ion-icon>
                     </div>

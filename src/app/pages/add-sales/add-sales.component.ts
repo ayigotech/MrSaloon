@@ -27,7 +27,7 @@ export class AddSalesComponent {
   saleData: SaleData = {
     amount: null,
     datetime: new Date(),
-    customer: '',
+    customer: 'walk-in',
     service: ''
   };
 
@@ -78,9 +78,13 @@ export class AddSalesComponent {
         'Other'
       ];
     } finally {
+      console.log(this.serviceNames) //this is printing correctly from storage service
       this.isLoading = false;
     }
   }
+
+
+
 
   async loadQuickAmounts() {
     try {

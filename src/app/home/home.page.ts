@@ -98,6 +98,8 @@ export class HomePage implements OnInit {
         this.storageService.getDailySummary(todayKey)
       ]);
 
+      console.log(transactions)
+
       // Update transactions
       this.todayTransactions = transactions;
 

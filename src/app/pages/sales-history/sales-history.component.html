@@ -44,7 +44,7 @@
     <div class="content" *ngIf="!isLoading">
 
         <!-- Total Stats Card -->
-        <div class="total-stats-card" *ngIf="dailySummaries.length > 0" data-aos="fade-up">
+        <div class="total-stats-card" *ngIf="dailySummaries.length > 0">
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-value">{{ formatCurrency(getTotalStats().totalRevenue) }}</div>
@@ -66,7 +66,7 @@
             <div class="section-title">Daily Breakdown</div>
 
             <div class="summary-list">
-                <div class="summary-card" *ngFor="let summary of dailySummaries; let i = index" [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 100">
+                <div class="summary-card" *ngFor="let summary of dailySummaries; let i = index">
 
                     <!-- Date Header -->
                     <div class="date-header">
@@ -118,7 +118,7 @@
         </div>
 
         <!-- Empty State -->
-        <div class="empty-state" *ngIf="dailySummaries.length === 0 && !isLoading" data-aos="fade-up">
+        <div class="empty-state" *ngIf="dailySummaries.length === 0 && !isLoading">
             <div class="empty-icon">
                 <ion-icon name="calendar"></ion-icon>
             </div>

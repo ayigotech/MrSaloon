@@ -13,6 +13,8 @@ import { IonicModule } from "@ionic/angular";
   styleUrls: ['./dashboard.component.scss'],
   imports: [CommonModule, IonContent, IonIcon, IonRefresherContent, IonRefresher]
 })
+
+
 export class DashboardComponent implements OnInit {
   isLoading = true;
   
@@ -63,44 +65,86 @@ export class DashboardComponent implements OnInit {
   }
 
 
+
   async calculateDashboardMetrics() {
-    try {
-      this.isLoading = true;
+  try {
+    this.isLoading = true;
 
-      // Get data for the last 30 days
-      const endDate = new Date();
-      const startDate = new Date();
-      startDate.setDate(startDate.getDate() - 30);
+    // Get data for the last 30 days
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 30);
 
-      const [transactions, summaries, services] = await Promise.all([
-        this.storageService.getTransactionsByDateRange(
-          startDate.toISOString().split('T')[0],
-          endDate.toISOString().split('T')[0]
-        ),
-        this.storageService.getDailySummaries(
-          startDate.toISOString().split('T')[0],
-          endDate.toISOString().split('T')[0]
-        ),
-        this.storageService.getServices()
-      ]);
+    console.log('=== DASHBOARD CALCULATION START ===');
+    console.log('Date range:', {
+      start: startDate.toISOString().split('T')[0],
+      end: endDate.toISOString().split('T')[0]
+    });
 
-      // Calculate all metrics
-      this.calculatePerformanceTrend(summaries);
-      this.calculateServiceDistribution(transactions, services);
-      this.calculateAdditionalMetrics(transactions, summaries);
+    // DEBUG: Try different methods
+    console.log('Trying getTransactionsByDateRange...');
+    const rangeTransactions = await this.storageService.getTransactionsByDateRange(
+      startDate.toISOString().split('T')[0],
+      endDate.toISOString().split('T')[0]
+    );
+    console.log('Range transactions:', rangeTransactions.length);
 
-      this.notificationService.success('Dashboard updated with latest data', 'Analytics Ready');
+    console.log('Trying getTransactions (no filter)...');
+    const allTransactions = await this.storageService.getTransactions();
+    console.log('All transactions:', allTransactions.length);
 
-    } catch (error) {
-      console.error('Error calculating dashboard metrics:', error);
-      this.notificationService.error(
-        'Failed to load dashboard data. Please try again.',
-        'Analytics Error'
-      );
-    } finally {
-      this.isLoading = false;
-    }
+    // Filter manually to see if transactions are in range
+    const filteredTransactions = allTransactions.filter(t => {
+      const txDate = new Date(t.datetime);
+      return txDate >= startDate && txDate <= endDate;
+    });
+    console.log('Manually filtered in range:', filteredTransactions.length);
+
+    // Now get all data
+    const [transactions, summaries, services] = await Promise.all([
+      this.storageService.getTransactionsByDateRange(
+        startDate.toISOString().split('T')[0],
+        endDate.toISOString().split('T')[0]
+      ),
+      this.storageService.getDailySummaries(
+        startDate.toISOString().split('T')[0],
+        endDate.toISOString().split('T')[0]
+      ),
+      this.storageService.getServices()
+    ]);
+
+    console.log('Final loaded data:', {
+      transactions: transactions.length,
+      summaries: summaries.length,
+      services: services.length
+    });
+
+    // If no transactions from range, use manually filtered
+    const transactionsToUse = transactions.length > 0 ? transactions : filteredTransactions;
+    console.log('Using transactions:', transactionsToUse.length);
+
+    // Calculate all metrics
+    this.calculatePerformanceTrend(summaries);
+    this.calculateServiceDistribution(transactionsToUse, services);  // ← Use corrected transactions
+    this.calculateAdditionalMetrics(transactionsToUse, summaries);
+
+    console.log('=== DASHBOARD CALCULATION COMPLETE ===');
+
+    this.notificationService.success('Dashboard updated with latest data', 'Analytics Ready');
+
+  } catch (error) {
+    console.error('Error calculating dashboard metrics:', error);
+    this.notificationService.error(
+      'Failed to load dashboard data. Please try again.',
+      'Analytics Error'
+    );
+  } finally {
+    this.isLoading = false;
   }
+}
+
+
+
 
   private calculatePerformanceTrend(summaries: DailySummary[]) {
     if (summaries.length === 0) return;
@@ -155,7 +199,36 @@ export class DashboardComponent implements OnInit {
 
  
   private calculateServiceDistribution(transactions: Transaction[], services: any[]) {
-  const sales = transactions.filter(t => t.type === TransactionType.SALE);
+
+    console.log('=== DEBUGGING SERVICE DISTRIBUTION ===');
+  
+  // 1. Log all transactions
+  console.log('All transactions:', transactions);
+  console.log('Transaction count:', transactions.length);
+
+
+  // 2. Filter sales
+  const sales = transactions.filter(t => {
+    console.log(`Checking transaction ${t.id}:`, {
+      type: t.type,
+      isSale: t.type === 'sale',
+      isTransactionTypeSALE: t.type === TransactionType.SALE,
+      TransactionType_SALE_value: TransactionType.SALE
+    });
+    return t.type === 'sale';
+  });
+
+
+  console.log('Filtered sales:', sales);
+  console.log('Sales count:', sales.length);
+  
+  // 3. Check what TransactionType.SALE actually is
+  console.log('TransactionType.SALE:', TransactionType.SALE);
+  console.log('typeof TransactionType.SALE:', typeof TransactionType.SALE);
+  
+  // 4. Alternative filter
+  const sales2 = transactions.filter(t => t.type === 'sale');
+  console.log('Alternative filter sales:', sales2);
 
   // Normalize: lowercase and trim to avoid mismatch
   const normalize = (value: string) => (value || '').trim().toLowerCase();
@@ -198,7 +271,7 @@ export class DashboardComponent implements OnInit {
     .map(stats => ({
       service: stats.label,
       percentage: totalRevenue > 0 ? (stats.revenue / totalRevenue) * 100 : 0,
-      averageRevenue: stats.count > 0 ? stats.revenue / stats.count : 0,
+      averageRevenue: stats.count > 0 ? stats.revenue : 0, //i switch to use total revene
       transactionCount: stats.count
     }))
     .sort((a, b) => b.percentage - a.percentage);

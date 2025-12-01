@@ -15,6 +15,9 @@ import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, Ion
     // IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, 
     IonIcon, IonSegment, IonSegmentButton, IonRefresher, IonRefresherContent]
 })
+
+
+
 export class SalesHistoryComponent implements OnInit {
   currentFilter: SalesHistoryFilter = 'this-week';
   dailySummaries: DailySummary[] = [];
@@ -47,7 +50,7 @@ export class SalesHistoryComponent implements OnInit {
   }
 
 
-  async loadSalesHistory() {
+  async loadSalesHistory2() {
     try {
       this.isLoading = true;
       
@@ -72,6 +75,72 @@ export class SalesHistoryComponent implements OnInit {
       this.isLoading = false;
     }
   }
+
+
+
+
+
+
+
+async loadSalesHistory() {
+  try {
+    this.isLoading = true;
+    
+    const dateRange = this.getDateRangeForFilter();
+    
+    console.log('=== SALES HISTORY DEBUG ===');
+    console.log('Current filter:', this.currentFilter);
+    console.log('Date range:', dateRange);
+    
+    // Debug: Try to get ALL summaries first
+    const db = await this.storageService['ensureDB']();
+    const tx = db.transaction('summaries', 'readonly');
+    const store = tx.objectStore('summaries');
+    const allRequest = store.getAll();
+    
+    allRequest.onsuccess = () => {
+      console.log('All summaries in database:', allRequest.result);
+      console.log('Count:', allRequest.result.length);
+    };
+    
+    // Now get filtered summaries
+    const summaries = await this.storageService.getDailySummaries(
+      dateRange.startDate,
+      dateRange.endDate
+    );
+
+    console.log('Filtered summaries:', summaries);
+    console.log('Filtered count:', summaries.length);
+
+    this.dailySummaries = summaries.sort((a, b) => 
+      new Date(b.dateKey).getTime() - new Date(a.dateKey).getTime()
+    );
+
+    console.log('Sorted daily summaries:', this.dailySummaries);
+
+  } catch (error) {
+    console.error('Error loading sales history:', error);
+    this.notificationService.error(
+      'Failed to load sales history. Please try again.',
+      'Data Load Error'
+    );
+    this.dailySummaries = [];
+  } finally {
+    this.isLoading = false;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
   private getDateRangeForFilter(): { startDate: string, endDate: string } {
     const now = new Date();

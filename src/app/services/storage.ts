@@ -214,7 +214,8 @@ export class StorageService {
     });
   }
 
-  async getTransactions(date?: string): Promise<Transaction[]> {
+
+  async getTransactions2(date?: string): Promise<Transaction[]> {
     const db = await this.ensureDB();
     return new Promise((resolve, reject) => {
       const store = db.transaction('transactions').objectStore('transactions');
@@ -254,6 +255,70 @@ export class StorageService {
       request.onerror = () => reject(request.error);
     });
   }
+
+
+
+
+
+  async getTransactions(date?: string): Promise<Transaction[]> {
+  const db = await this.ensureDB();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction('transactions', 'readonly');
+    const store = transaction.objectStore('transactions');
+    
+    console.log('=== DEBUG getTransactions ===');
+    console.log('Date filter:', date);
+    
+    // Try BOTH methods to see what works
+    
+    // Method 1: Use getAll() on store (not index)
+    const getAllRequest = store.getAll();
+    
+    getAllRequest.onsuccess = () => {
+      console.log('Method 1 (getAll) - Found:', getAllRequest.result.length, 'transactions');
+      
+      if (getAllRequest.result.length > 0) {
+        console.log('Sample from getAll:', getAllRequest.result[0]);
+      }
+      
+      let result = getAllRequest.result as Transaction[];
+      
+      // Filter by date if provided
+      if (date) {
+        result = result.filter(t => {
+          const tDate = new Date(t.datetime).toISOString().split('T')[0];
+          return tDate === date;
+        });
+      }
+      
+      // Sort newest first
+      result.sort((a, b) => new Date(b.datetime).getTime() - new Date(a.datetime).getTime());
+      
+      console.log('Method 1 final result:', result.length);
+      resolve(result);
+    };
+    
+    getAllRequest.onerror = () => {
+      console.error('Method 1 error:', getAllRequest.error);
+      
+      // Fallback to Method 2
+      const index = store.index('datetime');
+      console.log('Using datetime index:', index);
+      
+      const indexRequest = index.getAll();
+      
+      indexRequest.onsuccess = () => {
+        console.log('Method 2 (index) - Found:', indexRequest.result.length, 'transactions');
+        resolve(indexRequest.result as Transaction[]);
+      };
+      
+      indexRequest.onerror = () => reject(indexRequest.error);
+    };
+  });
+}
+
+
+
 
   async getTodayTransactions(): Promise<Transaction[]> {
     const today = new Date().toISOString().split('T')[0];
