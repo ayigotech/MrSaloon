@@ -498,3 +498,22 @@
         transform: none;
     }
 }
+
+@media (max-width: 768px) {
+    .app-name {
+        font-size: 1.0rem;
+        color: #059669;
+    }
+    .app-description {
+        font-size: 0.9rem;
+        color: #64748b;
+    }
+    .outer-circle {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .inner-circle {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+}

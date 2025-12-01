@@ -222,3 +222,32 @@
         font-size: 1.1rem;
     }
 }
+
+@media (max-height: 768) {
+    .pin-container {
+        padding: 1rem;
+        height: auto;
+        min-height: 100vh;
+    }
+    .app-icon {
+        margin-bottom: 1rem;
+    }
+    .icon-circle {
+        width: 3rem;
+        height: 3rem;
+    }
+    .icon-circle ion-icon {
+        font-size: 1.3rem;
+    }
+    .welcome-text {
+        margin-bottom: 0.9rem;
+    }
+    .pin-dots {
+        margin-bottom: 1.3rem;
+    }
+    .key {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.0rem;
+    }
+}

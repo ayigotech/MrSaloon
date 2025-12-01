@@ -892,7 +892,7 @@
 @media (max-width: 768px) {
     /* Header */
     .page-title {
-        font-size: 22px;
+        font-size: 20px;
     }
     .save-btn {
         font-size: 15px;
@@ -902,24 +902,24 @@
     }
     /* Info Banner */
     .info-title {
-        font-size: 17px;
+        font-size: 15px;
     }
     .info-text {
-        font-size: 14px;
+        font-size: 13px;
     }
     .info-icon ion-icon {
         font-size: 26px;
     }
     /* Labels */
     .input-label {
-        font-size: 15px;
+        font-size: 14px;
     }
     /* Amount input */
     .currency-symbol {
-        font-size: 15px;
+        font-size: 14px;
     }
     .amount-input {
-        font-size: 20px;
+        font-size: 18px;
     }
     .input-error {
         font-size: 13px;
@@ -930,32 +930,32 @@
     }
     /* Category select */
     .category-text {
-        font-size: 15px;
+        font-size: 14px;
     }
     /* Vendor input */
     .text-input {
-        font-size: 15px;
+        font-size: 14px;
     }
     /* Payment methods */
     .payment-method-btn {
-        font-size: 14px;
+        font-size: 13px;
     }
     .payment-method-btn ion-icon {
         font-size: 20px;
     }
     /* Notes textarea */
     .notes-input {
-        font-size: 15px;
+        font-size: 14px;
     }
     /* Recent expenses */
     .section-title {
-        font-size: 18px;
-    }
-    .recent-amount {
         font-size: 16px;
     }
-    .recent-vendor {
+    .recent-amount {
         font-size: 14px;
+    }
+    .recent-vendor {
+        font-size: 13px;
     }
     .recent-category {
         font-size: 13px;
@@ -969,9 +969,9 @@
     }
     /* Category modal */
     .select-category-title {
-        font-size: 20px;
+        font-size: 18px;
     }
     .category-option {
-        font-size: 16px;
+        font-size: 14px;
     }
 }

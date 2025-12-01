@@ -134,7 +134,7 @@ private async handleSuccessfulLogin() {
   this.notificationService.success('Login successful!', 'Welcome Back');
   
   setTimeout(() => {
-    this.router.navigate(['/tabs/home']);
+    this.router.navigate(['/tabs/welcome']);
   }, 500);
 }
 
